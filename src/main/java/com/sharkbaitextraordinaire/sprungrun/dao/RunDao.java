@@ -47,6 +47,5 @@ public class RunDao {
 				run.setShoeid(rs.getInt("shoeid"));
 				return run;}, Date.valueOf(date));
 		return runs;
-//		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Run>(Run.class), new Object[] {Date.valueOf(date)});
 	}
 }
