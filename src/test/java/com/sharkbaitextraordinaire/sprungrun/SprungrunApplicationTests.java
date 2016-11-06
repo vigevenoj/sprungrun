@@ -1,4 +1,4 @@
-package com.sharkbaitextraordinaire;
+package com.sharkbaitextraordinaire.sprungrun;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
