@@ -18,7 +18,7 @@ public class RunDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public void insert(Run run) {
-		String sql = "insert into runs (rdate, timeofday, distance, units, elapsed, effort, comment, shoeid)"
+		String sql = "insert into runs (rdate, timeofday, distance, units, elapsed, effort, comments, shoeid)"
 				+ " values "
 				+ " (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, new Object[] { run.getRdate(), run.getTimeofday(), run.getDistance(),
@@ -26,13 +26,13 @@ public class RunDao {
 	}
 	
 	public List<Run> findAll() {
-		String sql = "select rdate, timeofday, distance, units, elapsed, effort, comment, shoeid from runs";
+		String sql = "select rdate, timeofday, distance, units, elapsed, effort, comments, shoeid from runs";
 		List<Run> runs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Run>(Run.class));
 		return runs;
 	}
 	
 	public List<Run> findByDate(LocalDate date) {
-		String sql = "select rdate, timeofday, distance, units, elapsed, effort, comment, shoeid from runs"
+		String sql = "select rdate, timeofday, distance, units, elapsed, effort, comments, shoeid from runs"
 				+ " where rdate = ?";
 		List<Run> runs = jdbcTemplate.query(sql, 
 				(rs, rowNum) -> { 
