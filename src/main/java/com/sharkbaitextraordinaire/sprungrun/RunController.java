@@ -17,7 +17,7 @@ import com.sharkbaitextraordinaire.sprungrun.dao.RunDao;
 import com.sharkbaitextraordinaire.sprungrun.model.Run;
 
 @RestController
-@RequestMapping("/running")
+@RequestMapping("/runs")
 public class RunController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RunController.class);
@@ -31,7 +31,7 @@ public class RunController {
 		return runDao.findAll();
 	}
 	
-	@RequestMapping(value = "/runs/bydate", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/bydate", method = RequestMethod.GET, produces = "application/json")
 	public List<Run> findByDate(@RequestParam(value="date")
 								@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		logger.info("Trying to find runs with date " + date);
