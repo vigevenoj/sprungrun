@@ -2,3 +2,5 @@
 mvnw
 mvnw.cmd
 application.yml
+.*.sw?
+target/*
