@@ -2,29 +2,48 @@ package com.sharkbaitextraordinaire.sprungrun.model;
 
 import java.math.BigDecimal;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity(name = "runs")
+@Table(name = "runs")
 public class Run {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="runid_seq")
+	@SequenceGenerator(name="runid_seq",sequenceName="runid_seq",allocationSize=1)
 	private Long runid;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate rdate;
 	private String timeofday;
 	private BigDecimal distance;
 	private String units;
 	private Time elapsed;
 	private String effort;
-	private String comment;
+	private String comments;
 	private int shoeid;
 	
 	public Run(LocalDate rdate, String timeofday, BigDecimal distance, String units, Time elapsed, String effort,
-			String comment, int shoeid) {
+			String comments, int shoeid) {
 		this.rdate = rdate;
 		this.timeofday = timeofday;
 		this.distance = distance;
 		this.units = units;
 		this.elapsed = elapsed;
 		this.effort = effort;
-		this.comment = comment;
+		this.comments = comments;
 		this.shoeid = shoeid;
 	}
 	
@@ -73,11 +92,11 @@ public class Run {
 	public void setEffort(String effort) {
 		this.effort = effort;
 	}
-	public String getComment() {
-		return comment;
+	public String getComments() {
+		return comments;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	public int getShoeid() {
 		return shoeid;
@@ -90,7 +109,7 @@ public class Run {
     public String toString() {
         return String.format(
                 "Run [runid %d on %s, at %s, %s %s, took %s , effort='%s', %s, shoeid='%d']",
-                runid, rdate, timeofday, distance, units, elapsed, effort, comment, shoeid
+                runid, rdate, timeofday, distance, units, elapsed, effort, comments, shoeid
                 );
     }
 }
